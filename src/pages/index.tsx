@@ -20,19 +20,21 @@ const paths = [
 export default function Home() {
   const shakeVariants = {
     initial: {
-      y: 300,
+      opacity: 0,
+      y: 200,
       rotateZ: 0,
     },
     animate: {
+      opacity: 1,
       y: 0,
       rotateZ: [
         0, 10, -10, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0,
       ],
       transition: {
         delay: 0.5,
-        duration: 10,
-        damping: 10, // Controls the "bounciness" of the animation
-        stiffness: 100, // Controls the strength of the spring
+        duration: 4,
+        damping: 10,
+        stiffness: 100,
         yoyo: Infinity,
       },
     },
@@ -40,21 +42,21 @@ export default function Home() {
 
   const shakeVariants2 = {
     initial: {
-      y: 300,
+      opacity: 0,
+      y: 200,
       rotateZ: 0,
-      scale: 1.2,
     },
     animate: {
+      opacity: 1,
       y: 0,
-      scale: 0.8,
       rotateZ: [
         0, -10, 10, -10, 10, 0, -10, 10, 0, -10, 10, 0, 10, -10, 0, 10, -10, 0,
       ],
       transition: {
         delay: 0.5,
-        duration: 10,
-        damping: 10, // Controls the "bounciness" of the animation
-        stiffness: 100, // Controls the strength of the spring
+        duration: 4,
+        damping: 10,
+        stiffness: 100,
         yoyo: Infinity,
       },
     },
@@ -71,7 +73,16 @@ export default function Home() {
               className="relative w-28 h-28"
               initial="initial"
               animate="animate"
-              variants={shakeVariants}
+              variants={{
+                ...shakeVariants,
+                animate: {
+                  ...shakeVariants.animate,
+                  transition: {
+                    ...shakeVariants.animate.transition,
+                    delay: 0.5 + index * 0.2,
+                  },
+                },
+              }}
             >
               <Image src={path} fill className="object-contain" alt="r" />
             </motion.div>
@@ -82,7 +93,16 @@ export default function Home() {
               className="relative w-28 h-28"
               initial="initial"
               animate="animate"
-              variants={shakeVariants2}
+              variants={{
+                ...shakeVariants2,
+                animate: {
+                  ...shakeVariants2.animate,
+                  transition: {
+                    ...shakeVariants2.animate.transition,
+                    delay: 0.5 + index * 0.2,
+                  },
+                },
+              }}
             >
               <Image src={path} fill className="object-contain" alt="r" />
             </motion.div>

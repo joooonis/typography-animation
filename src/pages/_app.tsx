@@ -13,7 +13,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <div className="mx-auto w-full ">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence>
             <Component {...pageProps} key={router.route} />
           </AnimatePresence>
         </PersistGate>

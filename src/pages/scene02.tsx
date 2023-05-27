@@ -66,7 +66,6 @@ export default function Scene() {
     false,
   ]);
 
-  console.log(animatienEnd);
   const router = useRouter();
   return (
     <motion.div>
@@ -129,7 +128,7 @@ export default function Scene() {
                 }}
                 transition={{ ease: 'circOut', duration: 5 }}
                 className="relative w-[40rem] h-[40rem]"
-                onAnimationStart={() => {
+                onAnimationComplete={() => {
                   const newArr = [...animatienEnd];
                   newArr[2] = true;
                   setAnimatienEnd(newArr);
@@ -144,11 +143,119 @@ export default function Scene() {
               </motion.div>
             </div>
           )}
+          {animatienEnd[2] && (
+            <div className="absolute z-99 top-10">
+              <motion.div
+                initial={{ x: -100, scale: 1, opacity: 1, rotateZ: 0 }}
+                animate={{
+                  x: 800,
+                  scale: 1.2,
+                  opacity: 0,
+                  rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
+                }}
+                transition={{ ease: 'circOut', duration: 5 }}
+                className="relative w-[28rem] h-[28rem]"
+                onAnimationComplete={() => {
+                  const newArr = [...animatienEnd];
+                  newArr[3] = true;
+                  setAnimatienEnd(newArr);
+                }}
+              >
+                <Image
+                  src="/scene02/man-word2.png"
+                  fill
+                  className="object-contain rotate-[-20deg] transform"
+                  alt="word"
+                />
+              </motion.div>
+            </div>
+          )}
+          {animatienEnd[3] && (
+            <div className="absolute z-99 top-10">
+              <motion.div
+                initial={{ x: 800, scale: 1, opacity: 1, rotateZ: 0 }}
+                animate={{
+                  x: 0,
+                  scale: 1.2,
+                  opacity: 0,
+                  rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
+                }}
+                transition={{ ease: 'circOut', duration: 5 }}
+                className="relative w-[44rem] h-[44rem]"
+                onAnimationComplete={() => {
+                  const newArr = [...animatienEnd];
+                  newArr[4] = true;
+                  setAnimatienEnd(newArr);
+                }}
+              >
+                <Image
+                  src="/scene02/woman-word2.png"
+                  fill
+                  className="object-contain rotate-[20deg] transform"
+                  alt="word"
+                />
+              </motion.div>
+            </div>
+          )}
+          {animatienEnd[4] && (
+            <div className="absolute z-99 top-10">
+              <motion.div
+                initial={{ x: -100, scale: 1, opacity: 1, rotateZ: 0 }}
+                animate={{
+                  x: 800,
+                  scale: 1.2,
+                  opacity: 0,
+                  rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
+                }}
+                transition={{ ease: 'circOut', duration: 5 }}
+                className="relative w-[32rem] h-[32rem]"
+                onAnimationComplete={() => {
+                  const newArr = [...animatienEnd];
+                  newArr[5] = true;
+                  setAnimatienEnd(newArr);
+                }}
+              >
+                <Image
+                  src="/scene02/man-word3.png"
+                  fill
+                  className="object-contain rotate-[-20deg] transform"
+                  alt="word"
+                />
+              </motion.div>
+            </div>
+          )}
+          {animatienEnd[5] && (
+            <div className="absolute z-99 top-10">
+              <motion.div
+                initial={{ x: 1200, scale: 1, opacity: 1, rotateZ: 0 }}
+                animate={{
+                  x: 0,
+                  scale: 1.2,
+                  opacity: 0,
+                  rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
+                }}
+                transition={{ ease: 'circOut', duration: 5 }}
+                className="relative w-[36rem] h-[36rem]"
+                onAnimationComplete={() => {
+                  const newArr = [...animatienEnd];
+                  newArr[6] = true;
+                  setAnimatienEnd(newArr);
+                }}
+              >
+                <Image
+                  src="/scene02/woman-word3.png"
+                  fill
+                  className="object-contain rotate-[20deg] transform"
+                  alt="word"
+                />
+              </motion.div>
+            </div>
+          )}
           <motion.div
             initial={{ opacity: 0, x: -200, scale: 0.5 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ ease: 'easeOut', duration: 1 }}
-            className="absolute -right-40 -bottom-40 w-[50rem] h-[50rem]"
+            className="absolute -right-40 -bottom-36 w-[44rem] h-[44rem]"
           >
             <Image
               src="/scene02/woman1.png"

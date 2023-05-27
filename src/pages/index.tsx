@@ -1,6 +1,7 @@
 import Layout from '@components/common/layout';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import { useState } from 'react';
 
 const paths = [
   '/scene01/r.png',
@@ -17,50 +18,52 @@ const paths = [
   '/scene01/n.png',
 ];
 
-export default function Home() {
-  const shakeVariants = {
-    initial: {
-      opacity: 0,
-      y: 200,
-      rotateZ: 0,
+const variants: Variants = {
+  initial: {
+    opacity: 0,
+    y: 200,
+    rotateZ: 0,
+  },
+  shake: {
+    opacity: 1,
+    y: 0,
+    rotateZ: [
+      0, 10, -10, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0,
+    ],
+  },
+  shake2: {
+    opacity: 1,
+    y: 0,
+    rotateZ: [
+      0, -10, 10, -10, 10, 0, -10, 10, 0, -10, 10, 0, 10, -10, 0, 10, -10, 0,
+    ],
+  },
+  shoot: {
+    y: -4000,
+    x: 4000,
+    opacity: 1,
+    transition: {
+      duration: 4,
+      easings: 'easeInOut',
     },
-    animate: {
-      opacity: 1,
-      y: 0,
-      rotateZ: [
-        0, 10, -10, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0,
-      ],
-      transition: {
-        delay: 0.5,
-        duration: 4,
-        damping: 10,
-        stiffness: 100,
-        yoyo: Infinity,
-      },
-    },
-  };
+  },
+};
 
-  const shakeVariants2 = {
-    initial: {
-      opacity: 0,
-      y: 200,
-      rotateZ: 0,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      rotateZ: [
-        0, -10, 10, -10, 10, 0, -10, 10, 0, -10, 10, 0, 10, -10, 0, 10, -10, 0,
-      ],
-      transition: {
-        delay: 0.5,
-        duration: 4,
-        damping: 10,
-        stiffness: 100,
-        yoyo: Infinity,
-      },
-    },
-  };
+export default function Home() {
+  const [animatienEnd, setAnimatienEnd] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   return (
     <Layout>
@@ -72,17 +75,26 @@ export default function Home() {
               id={path}
               className="relative w-28 h-28"
               initial="initial"
-              animate="animate"
+              animate={animatienEnd[index] ? 'shoot' : 'shake'}
               variants={{
-                ...shakeVariants,
-                animate: {
-                  ...shakeVariants.animate,
+                ...variants,
+                shake: {
+                  ...variants.shake,
                   transition: {
-                    ...shakeVariants.animate.transition,
+                    duration: 2,
                     delay: 0.5 + index * 0.2,
                   },
                 },
               }}
+              onAnimationComplete={(curr) =>
+                setTimeout(() => {
+                  setAnimatienEnd((prev) => {
+                    const newArr = [...prev];
+                    newArr[index] = true;
+                    return newArr;
+                  });
+                }, 1000)
+              }
             >
               <Image src={path} fill className="object-contain" alt="r" />
             </motion.div>
@@ -92,17 +104,26 @@ export default function Home() {
               id={path}
               className="relative w-28 h-28"
               initial="initial"
-              animate="animate"
+              animate={animatienEnd[index] ? 'shoot' : 'shake2'}
               variants={{
-                ...shakeVariants2,
-                animate: {
-                  ...shakeVariants2.animate,
+                ...variants,
+                shake2: {
+                  ...variants.shake2,
                   transition: {
-                    ...shakeVariants2.animate.transition,
+                    duration: 2,
                     delay: 0.5 + index * 0.2,
                   },
                 },
               }}
+              onAnimationComplete={(curr) =>
+                setTimeout(() => {
+                  setAnimatienEnd((prev) => {
+                    const newArr = [...prev];
+                    newArr[index] = true;
+                    return newArr;
+                  });
+                }, 1000)
+              }
             >
               <Image src={path} fill className="object-contain" alt="r" />
             </motion.div>

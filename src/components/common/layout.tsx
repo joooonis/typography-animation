@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeOut', duration: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      exit={{ transition: { duration: 0.5 } }}
     >
       <div className="w-full relative overflow-hidden bg-[#ebebeb] font-Balsamiq h-full flex justify-center items-center">
         {children}

@@ -2,6 +2,7 @@ import Layout from '@components/common/layout';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const paths = [
   '/scene01/r.png',
@@ -49,7 +50,7 @@ const variants: Variants = {
   },
 };
 
-export default function Home() {
+export default function Scene() {
   const [animatienEnd, setAnimatienEnd] = useState<boolean[]>([
     false,
     false,
@@ -65,6 +66,7 @@ export default function Home() {
     false,
   ]);
 
+  const router = useRouter();
   return (
     <Layout>
       <div className="relative overflow-hidden bg-[#CBCBCB] w-full flex justify-center items-center h-screen">
@@ -115,15 +117,28 @@ export default function Home() {
                   },
                 },
               }}
-              onAnimationComplete={(curr) =>
+              onAnimationComplete={(curr) => {
+                if (index === paths.length - 1) {
+                  setTimeout(() => {
+                    setAnimatienEnd((prev) => {
+                      const newArr = [...prev];
+                      newArr[index] = true;
+                      return newArr;
+                    });
+                  }, 1000);
+
+                  setTimeout(() => {
+                    router.push('/scene02');
+                  }, 2000);
+                }
                 setTimeout(() => {
                   setAnimatienEnd((prev) => {
                     const newArr = [...prev];
                     newArr[index] = true;
                     return newArr;
                   });
-                }, 1000)
-              }
+                }, 1000);
+              }}
             >
               <Image src={path} fill className="object-contain" alt="r" />
             </motion.div>

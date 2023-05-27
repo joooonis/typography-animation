@@ -1,6 +1,6 @@
 import Layout from '@components/common/layout';
 import Image from 'next/image';
-import { motion, Variants } from 'framer-motion';
+import { animate, motion, useAnimation, Variants } from 'framer-motion';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -59,28 +59,32 @@ export default function Scene() {
     false,
     false,
     false,
-    false,
-    false,
-    false,
-    false,
-    false,
   ]);
+  const [isManTalk, setIsManTalk] = useState<boolean>(false);
+  const [isWomanTalk, setIsWomanTalk] = useState<boolean>(false);
+
+  const controls = useAnimation();
+  console.log(controls);
 
   const router = useRouter();
   return (
     <motion.div>
-      <div className="w-full relative overflow-hidden  font-Balsamiq h-full flex justify-center items-center">
-        <div className="relative overflow-hidden bg-[#CBCBCB] w-full flex px-40 justify-between items-center h-screen">
+      <div className="cursor-none relative overflow-hidden  font-Balsamiq w-full aspect-video flex justify-center items-center">
+        <div className="relative overflow-hidden bg-[#CBCBCB] w-full aspect-video flex px-40 justify-between items-center h-screen">
           <motion.div
-            initial={{ opacity: 0, x: 200, scale: 0.5 }}
+            initial={{ opacity: 0, x: 200, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ ease: 'easeOut', duration: 1, delay: 1 }}
+            whileHover={{
+              rotateZ: [0, 2, -2, 2, -2, 0],
+              transition: { duration: 2, yoyo: Infinity },
+            }}
             onAnimationComplete={() => {
               const newArr = [...animatienEnd];
               newArr[0] = true;
               setAnimatienEnd(newArr);
             }}
-            className="absolute -left-40 -bottom-40 w-[50rem] h-[50rem]"
+            className="absolute -left-40 -bottom-40 w-[900px] h-[900px]"
           >
             <Image
               src="/scene02/man1.png"
@@ -90,11 +94,11 @@ export default function Scene() {
             />
           </motion.div>
           {animatienEnd[0] && (
-            <div className="absolute z-99 top-10">
+            <div className="absolute z-99 top-40">
               <motion.div
                 initial={{ x: -100, scale: 1, opacity: 1, rotateZ: 0 }}
                 animate={{
-                  x: 800,
+                  x: 900,
                   scale: 1.2,
                   opacity: 0,
                   rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
@@ -117,11 +121,11 @@ export default function Scene() {
             </div>
           )}
           {animatienEnd[1] && (
-            <div className="absolute z-99 top-10">
+            <div className="absolute z-99 top-40">
               <motion.div
                 initial={{ x: 800, scale: 1, opacity: 1, rotateZ: 0 }}
                 animate={{
-                  x: -100,
+                  x: 0,
                   scale: 1.2,
                   opacity: 0,
                   rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
@@ -144,11 +148,11 @@ export default function Scene() {
             </div>
           )}
           {animatienEnd[2] && (
-            <div className="absolute z-99 top-10">
+            <div className="absolute z-99 top-40">
               <motion.div
                 initial={{ x: -100, scale: 1, opacity: 1, rotateZ: 0 }}
                 animate={{
-                  x: 800,
+                  x: 900,
                   scale: 1.2,
                   opacity: 0,
                   rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
@@ -171,7 +175,7 @@ export default function Scene() {
             </div>
           )}
           {animatienEnd[3] && (
-            <div className="absolute z-99 top-10">
+            <div className="absolute z-99 top-40">
               <motion.div
                 initial={{ x: 800, scale: 1, opacity: 1, rotateZ: 0 }}
                 animate={{
@@ -198,11 +202,11 @@ export default function Scene() {
             </div>
           )}
           {animatienEnd[4] && (
-            <div className="absolute z-99 top-10">
+            <div className="absolute z-99 top-40">
               <motion.div
                 initial={{ x: -100, scale: 1, opacity: 1, rotateZ: 0 }}
                 animate={{
-                  x: 800,
+                  x: 900,
                   scale: 1.2,
                   opacity: 0,
                   rotateZ: [0, 2, -2, 2, -2, 0, 2, -2, 0, 2, -2, 0],
@@ -225,7 +229,7 @@ export default function Scene() {
             </div>
           )}
           {animatienEnd[5] && (
-            <div className="absolute z-99 top-10">
+            <div className="absolute z-99 top-40">
               <motion.div
                 initial={{ x: 1200, scale: 1, opacity: 1, rotateZ: 0 }}
                 animate={{
@@ -252,10 +256,14 @@ export default function Scene() {
             </div>
           )}
           <motion.div
-            initial={{ opacity: 0, x: -200, scale: 0.5 }}
+            initial={{ opacity: 0, x: -200, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ ease: 'easeOut', duration: 1 }}
-            className="absolute -right-40 -bottom-36 w-[44rem] h-[44rem]"
+            whileHover={{
+              rotateZ: [0, 2, -2, 2, -2, 0],
+              transition: { duration: 2, yoyo: Infinity },
+            }}
+            className="absolute -right-40 -bottom-36 w-[840px] h-[840px]"
           >
             <Image
               src="/scene02/woman1.png"

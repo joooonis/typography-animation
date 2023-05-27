@@ -10,7 +10,7 @@ const persistor = persistStore(store);
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
-    <div className="mx-auto w-full ">
+    <div className="mx-auto w-[1920px] aspect-video">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <AnimatePresence>

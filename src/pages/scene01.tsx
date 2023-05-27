@@ -69,7 +69,7 @@ export default function Scene() {
   const router = useRouter();
   return (
     <Layout>
-      <div className="relative overflow-hidden bg-[#CBCBCB] w-full flex justify-center items-center h-screen">
+      <div className="relative overflow-hidden bg-[#CBCBCB] w-full aspect-video flex justify-center items-center">
         {paths.map((path, index) =>
           index % 2 === 0 ? (
             <motion.div

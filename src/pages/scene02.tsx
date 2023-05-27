@@ -1,54 +1,7 @@
-import Layout from '@components/common/layout';
 import Image from 'next/image';
-import { animate, motion, useAnimation, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-
-const paths = [
-  '/scene01/r.png',
-  '/scene01/o.png',
-  '/scene01/b.png',
-  '/scene01/e.png',
-  '/scene01/r_1.png',
-  '/scene01/t.png',
-  '/scene01/m.png',
-  '/scene01/a.png',
-  '/scene01/s.png',
-  '/scene01/s_1.png',
-  '/scene01/i.png',
-  '/scene01/n.png',
-];
-
-const variants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 200,
-    rotateZ: 0,
-  },
-  shake: {
-    opacity: 1,
-    y: 0,
-    rotateZ: [
-      0, 10, -10, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0, 10, -10, 0,
-    ],
-  },
-  shake2: {
-    opacity: 1,
-    y: 0,
-    rotateZ: [
-      0, -10, 10, -10, 10, 0, -10, 10, 0, -10, 10, 0, 10, -10, 0, 10, -10, 0,
-    ],
-  },
-  shoot: {
-    y: -4000,
-    x: 4000,
-    opacity: 1,
-    transition: {
-      duration: 4,
-      easings: 'easeInOut',
-    },
-  },
-};
 
 export default function Scene() {
   const [animatienEnd, setAnimatienEnd] = useState<boolean[]>([
@@ -59,12 +12,9 @@ export default function Scene() {
     false,
     false,
     false,
+    false,
+    false,
   ]);
-  const [isManTalk, setIsManTalk] = useState<boolean>(false);
-  const [isWomanTalk, setIsWomanTalk] = useState<boolean>(false);
-
-  const controls = useAnimation();
-  console.log(controls);
 
   const router = useRouter();
   return (
@@ -255,6 +205,49 @@ export default function Scene() {
               </motion.div>
             </div>
           )}
+          {animatienEnd[6] && (
+            <div className="absolute z-99 left-80 top-60">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: 'circOut', duration: 0.1 }}
+                onAnimationComplete={() => {
+                  const newArr = [...animatienEnd];
+                  newArr[7] = true;
+                  setAnimatienEnd(newArr);
+                }}
+                className="relative w-[500px] h-[500px]"
+              >
+                <Image
+                  src="/scene02/ink1.png"
+                  fill
+                  className="object-contain"
+                  alt="word"
+                />
+              </motion.div>
+            </div>
+          )}
+          {animatienEnd[7] && (
+            <div className="absolute z-99 right-80 top-90">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: 'circOut', duration: 0.1, delay: 0.2 }}
+                onAnimationComplete={() => {
+                  router.push('/scene03');
+                }}
+                className="relative w-[500px] h-[500px]"
+              >
+                <Image
+                  src="/scene02/ink2.png"
+                  fill
+                  className="object-contain"
+                  alt="word"
+                />
+              </motion.div>
+            </div>
+          )}
+
           <motion.div
             initial={{ opacity: 0, x: -200, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}

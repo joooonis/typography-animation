@@ -14,6 +14,7 @@ export default function Scene() {
     false,
     false,
     false,
+    false,
   ]);
 
   const router = useRouter();
@@ -41,6 +42,23 @@ export default function Scene() {
               fill
               className="object-contain scale-x-[-1] transform"
               alt="man"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -200, scale: 0.9 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ ease: 'easeOut', duration: 1 }}
+            whileHover={{
+              rotateZ: [0, 2, -2, 2, -2, 0],
+              transition: { duration: 2, yoyo: Infinity },
+            }}
+            className="absolute -right-40 -bottom-36 w-[840px] h-[840px]"
+          >
+            <Image
+              src="/scene02/woman1.png"
+              fill
+              className="object-contain scale-x-[-1] transform"
+              alt="woman"
             />
           </motion.div>
           {animatienEnd[0] && (
@@ -233,8 +251,13 @@ export default function Scene() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ ease: 'circOut', duration: 0.1, delay: 0.2 }}
+                // onAnimationComplete={() => {
+                //   router.push('/scene03');
+                // }}
                 onAnimationComplete={() => {
-                  router.push('/scene03');
+                  const newArr = [...animatienEnd];
+                  newArr[8] = true;
+                  setAnimatienEnd(newArr);
                 }}
                 className="relative w-[500px] h-[500px]"
               >
@@ -247,24 +270,63 @@ export default function Scene() {
               </motion.div>
             </div>
           )}
-
-          <motion.div
-            initial={{ opacity: 0, x: -200, scale: 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ ease: 'easeOut', duration: 1 }}
-            whileHover={{
-              rotateZ: [0, 2, -2, 2, -2, 0],
-              transition: { duration: 2, yoyo: Infinity },
-            }}
-            className="absolute -right-40 -bottom-36 w-[840px] h-[840px]"
-          >
-            <Image
-              src="/scene02/woman1.png"
-              fill
-              className="object-contain scale-x-[-1] transform"
-              alt="woman"
-            />
-          </motion.div>
+          {animatienEnd[8] && (
+            <div className="">
+              <div className="absolute left-96 -translate-y-96 z-99 ">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 200 }}
+                  transition={{ ease: 'circOut', duration: 4 }}
+                  className="w-2 h-2 bg-black rounded-full"
+                />
+              </div>
+              <div className="z-99 absolute right-96 top-90">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 200 }}
+                  transition={{ ease: 'circOut', duration: 4 }}
+                  // onAnimationComplete={() => router.push('/scene03')}
+                  className="w-2 h-2 bg-black rounded-full"
+                />
+              </div>
+              <div className="z-99 absolute right-40 top-20">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 200 }}
+                  transition={{ ease: 'circOut', duration: 4 }}
+                  // onAnimationComplete={() => router.push('/scene03')}
+                  className="w-2 h-2 bg-black rounded-full"
+                />
+              </div>{' '}
+              <div className="z-99 absolute right-60 bottom-40">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 200 }}
+                  transition={{ ease: 'circOut', duration: 4 }}
+                  // onAnimationComplete={() => router.push('/scene03')}
+                  className="w-2 h-2 bg-black rounded-full"
+                />
+              </div>
+              <div className="z-99 absolute left-60 bottom-20">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 200 }}
+                  transition={{ ease: 'circOut', duration: 4 }}
+                  // onAnimationComplete={() => router.push('/scene03')}
+                  className="w-2 h-2 bg-black rounded-full"
+                />
+              </div>
+              <div className="z-99 absolute left-24 bottom-0">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 200 }}
+                  transition={{ ease: 'circOut', duration: 4 }}
+                  onAnimationComplete={() => router.push('/scene03')}
+                  className="w-2 h-2 bg-black rounded-full"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
